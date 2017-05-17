@@ -10,7 +10,8 @@ def prepare(messages):
 
 
 def generate(text):
-    text_model = markovify.Text(open("/Users/ZanderShah/git/discord-bot/test.txt").read())
+    text_model = markovify.Text(
+        open("/Users/ZanderShah/git/discord-bot/test.txt").read())
     reply = text_model.make_sentence()
     if (reply != None):
         return reply
