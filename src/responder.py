@@ -1,13 +1,11 @@
 import fbchat
 import markovify
-import config
-
+import config as c
 
 class MarkovResponder(fbchat.Client):
 
-    def __init__(self, email, password, debug=False, user_agent=None):
-        fbchat.Client.__init__(
-            self, config.email, config.password, debug, user_agent)
+    def __init__(self, email, password):
+        fbchat.Client.__init__(self, email, password)
 
     def on_message(self, mid, author_id, author_name, message, metadata):
         self.markAsDelivered(author_id, mid)
@@ -18,8 +16,7 @@ class MarkovResponder(fbchat.Client):
             self.send(author_id, text_model.make_sentence())
 
 
-text_model = markovify.Text(
-    open("/Users/ZanderShah/git/discord-bot/test.txt").read())
+text_model = markovify.Text(open('/Users/ZanderShah/git/markov-responder/test.txt').read())
 
-bot = MarkovResponder("<username>", "<email>")
+bot = MarkovResponder(c.USERNAME, c.PASSWORD)
 bot.listen()
